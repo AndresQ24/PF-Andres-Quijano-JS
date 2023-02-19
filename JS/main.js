@@ -437,3 +437,21 @@ fecha.innerHTML = `${fechaMostrar}`;
 // -It is sorted by price both ascending and descending, lines 329 to 341 in main.js
 
 // -The main.js file includes all the functions corresponding to the shopping cart that allow adding or removing it from the process.
+
+// -Data loading is done through a local JSON file (see canciones.json file).
+
+// -Taking into account the previous feedback, delivery is made through git hub and all comments are changed to English, seeking to leave the most relevant and additional, this description is also left in English at the end of the main.js file
+
+// -When building the card of the object, the link variable is included, which allows generating a play button that redirects to YouTube based on the corresponding song; more detail in class.js file and lines 66 to 68 in main.js
+
+// -There is the loadSong function that allows you to add a new song, due to server issues, the option for the user to load their own image was removed; However, the link option was left to redirect to the song that the user has chosen. Lines 87 to 101 in main.js
+
+// -Includes a series of events that allow you to save the song search by the name of the song or artist, lines 376 to 406 in main.js
+
+// -Use of the Luxon library lines 422 to 427 in main.js
+
+// -Sorts alphabetically by both author and song, lines 344 to 374 in main.js
+
+// -It is sorted by price both ascending and descending, lines 329 to 341 in main.js
+
+// -The main.js file includes all the functions corresponding to the shopping cart that allow adding or removing it from the process.
