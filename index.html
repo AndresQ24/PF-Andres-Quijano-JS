@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ICONS-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <!--BOOTSTRAP-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <!--TOASTIFY-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <!--CSS-->
+  <link rel="stylesheet" href="../PF+Andres Quijano/styles.css">
+
+
+  <title>Biblioteca de canciones</title>
+</head>
+
+<body class="">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="">Biblioteca de canciones</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon "></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          <form class="d-flex">
+            <input id="buscador" class="form-control me-2" placeholder="Busqueda por cancion/artista"
+              aria-label="Search">
+            <button id="btnBuscar" class="btn btn-outline-success">Buscar</button>
+          </form>
+
+        </ul>
+        <ul>
+          <select id="selectOrden" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option selected>Ordenar por:</option>
+            <option value="1">Mayor a menor</option>
+            <option value="2">Menor a mayor</option>
+            <option value="3">Alfabeticamente (Por Autor)</option>
+            <option value="4">Alfabeticamente (Por Cancion)</option>
+          </select>
+        </ul>
+        <ul style="list-style: none;" className="navbar-nav me-auto">
+          <li className="nav-item">
+            <a id="botonCarrito" data-bs-toggle="modal" data-bs-target="#idModalCarrito" class="btn btn-secondary"><i
+                class="fas fa-shopping-cart fa-1x"></i></a>
+          </li>
+        </ul>
+
+      </div>
+      <div>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container m-4">
+    <div class="row">
+      <div class="col-3">
+        <div id="fecha"></div>
+        <div id="reloj"></div>
+      </div>
+      <div class="col-3">
+        <button id="toggleMode" class="btn btn-dark">Dark</button>
+      </div>
+      <div class="col-3">
+        <button id="agregarCancion" data-bs-toggle="modal" data-bs-target="#idModalAgregarCancion"
+          class="btn btn-success">Agregar Cancion</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div id="coincidencia"></div>
+    <div id="canciones" class="row"></div>
+  </div>
+
+  <!--LOADER-->
+  <h3 id="loaderTexto" class="text-success text-center">Cargando Productos...</h3>
+  <div id="loader" class="d-flex justify-content-center">
+    <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden"></span>
+    </div>
+  </div>
+
+  <!--MODALS-->
+  <!--MODAL ADD SONG-->
+  <div class="modal fade" id="idModalAgregarCancion" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Cancion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <form id="formAgregarCancion">
+            <div class="mb-3">
+              <label for="titulo" class="form-label">Nombre Cancion:</label>
+              <input type="text" class="form-control" id="cancionInput" aria-describedby="nombreCancion">
+
+            </div>
+            <div class="mb-3">
+              <label for="autor" class="form-label">Artista:</label>
+              <input type="text" class="form-control" id="artistaInput" aria-describedby="artista">
+
+            </div>
+            <div class="mb-3">
+              <label for="precio" class="form-label">Precio:</label>
+              <input type="text" class="form-control" id="precioInput" aria-describedby="precio">
+
+            </div>
+            <div class="mb-3">
+              <label for="Url" class="form-label">URL/Enlace</label>
+              <input type="text" class="form-control" id="URLInput" aria-describedby="URL">
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="text" id="guardarCancionBtn" class="btn btn-success" data-bs-dismiss="modal">Guardar
+            cancion</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--MODAL SHOPPING CART-->
+  <div class="modal fade" id="idModalCarrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Carrito de Compras</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal-bodyCarrito">
+
+        </div>
+        <div class="row ml-ato">
+          <p id="precioTotal"></p>
+        </div>
+        <div class="modal-footer">
+
+
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" data-bs-dismiss="modal" class="btn btn-success" id="botonFinalizarCompra">Finalizar
+            Compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--BOOTSTRAP SCRIPT-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+  <!--SWEET ALERT SCRIPT-->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!--Toastify-->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <!--LUXON-->
+  <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
+  <!--OWN JS FILES-->
+  <!-- TAKING INTO ACCOUNT WHAT WAS SEEN IN CLASS, IT IS LEFT IN THIS ORDER SINCE IT IS VITAL FOR THE CODE TO WORK CORRECTLY -->
+  <script src="../PF+Andres Quijano/JS/class.js"></script>
+  <script src="../PF+Andres Quijano/JS/main.js"></script>
+  <script src="../PF+Andres Quijano/JS/darkToggle.js"></script>
+</body>
+
+</html>
